@@ -375,12 +375,12 @@ jobs:
           testkube get agent
           
           # Extract runner name ONLY from current cluster section
-          ACTUAL_RUNNER_NAME=$(testkube get agent | grep "•:testkube" | awk '{print $3}' | head -1)
+          ACTUAL_RUNNER_NAME=$(testkube get agent | grep "•:testkube" | awk '{print $1}' | head -1)
           
           if [ -z "$ACTUAL_RUNNER_NAME" ]; then
             echo "Failed to find runner in current cluster, trying more specific search..."
             # Fallback: search in the "Recognized agents" section specifically
-            ACTUAL_RUNNER_NAME=$(testkube get agent | grep -A 20 "Recognized agents in current cluster" | grep "github-action-runner" | awk '{print $3}' | head -1)
+            ACTUAL_RUNNER_NAME=$(testkube get agent | grep -A 20 "Recognized agents in current cluster" | grep "github-action-runner" | awk '{print $1}' | head -1)
           fi
           
           echo "Extracted runner name: $ACTUAL_RUNNER_NAME"
