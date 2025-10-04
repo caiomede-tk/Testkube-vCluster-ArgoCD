@@ -360,7 +360,8 @@ jobs:
             --namespace testkube \
             --floating
 
-          kubectl create namespace nginx
+          echo "=== Creating nginx namespace in vCluster ==="
+          kubectl create namespace nginx --dry-run=client -o yaml | kubectl apply -f -
 
           helm upgrade --namespace testkube testkube-github-action-runner-${{ github.run_id }} kubeshop/testkube-runner --reuse-values \
             --set execution.additionalNamespaces.nginx.serviceAccount.autoCreate=true \
