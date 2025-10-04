@@ -356,7 +356,7 @@ jobs:
           # Provision ephemeral runner in vCluster
           testkube install runner github-action-runner-${{ github.run_id }} \
             --create \
-            --env testkube-gke \
+            --env paris \
             --namespace testkube \
             --floating
 
